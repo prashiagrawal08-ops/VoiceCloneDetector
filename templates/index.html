@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Voice Clone Detector</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="icon">🎙️</div>
+
+        <h1>Voice Clone Detector</h1>
+
+        <p>
+            Detect whether a voice is Real or AI Generated
+        </p>
+
+        <form action="/predict" method="POST" enctype="multipart/form-data">
+
+            <div class="upload-box">
+
+                <input type="file" name="audio"
+                       accept=".wav,.mp3,.flac" required>
+
+            </div>
+
+            <button type="submit" id="analyzeBtn">
+                Analyze Voice
+            </button>
+
+        </form>
+
+        {% if result %}
+
+            <div class="result">
+                <h2>{{ result }}</h2>
+                <p>Confidence: {{ confidence }}%</p>
+            </div>
+
+        {% endif %}
+
+    </div>
+    <script>
+    document.querySelector("form").addEventListener("submit", function() {
+        document.getElementById("analyzeBtn").innerText = "Analyzing...";
+        document.getElementById("analyzeBtn").disabled = true;
+    });
+    </script>
+
+</body>
+</html>
